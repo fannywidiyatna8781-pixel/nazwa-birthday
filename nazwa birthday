@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ucapan Ulang Tahun</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #fceabb, #f8b500);
+        margin: 0;
+        color: #333;
+        overflow: hidden;
+    }
+    /* Cover */
+    #cover {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        transition: opacity 1s ease;
+        z-index: 2;
+    }
+    #cover h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.8s ease;
+    }
+    #cover .emoji {
+        font-size: 60px;
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: scale(0);
+        animation: bounce 1s ease forwards 0.8s;
+    }
+    @keyframes bounce {
+        0% { transform: scale(0); }
+        60% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    #cover a.button {
+        display: inline-block;
+        padding: 15px 30px;
+        background: #e91e63;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+    #cover a.button:hover {
+        background: #c2185b;
+        transform: translateY(-5px) scale(1.05);
+    }
+    /* Pesan */
+    #pesan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        transition: opacity 1s ease;
+    }
+    .card {
+        background: rgba(255,255,255,0.95);
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        max-width: 600px;
+        text-align: left;
+        line-height: 1.6;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+    .card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .card h2 {
+        text-align: center;
+        color: #e91e63;
+        margin-bottom: 20px;
+    }
+    .card p {
+        margin-bottom: 15px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+    }
+    .card p.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .emoji-card {
+        display: inline-block;
+        animation: sparkle 1.5s infinite alternate;
+    }
+    @keyframes sparkle {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div id="cover">
+    <h1 id="title">🎉 Selamat Ulang Tahun, Naz! 🎉</h1>
+    <div class="emoji">💫</div>
+    <a class="button" href="#" id="btn">Buka Pesan</a>
+</div>
+
+<!-- Pesan -->
+<div id="pesan">
+    <div class="card" id="card">
+        <h2>Pesan untuk Naz <span class="emoji-card">💖</span></h2>
+        <p>Happy birthday to one of the most amazing people I’ve ever met! 💫</p>
+        <p>Selamat ulang tahun, cintaa! Hari ini spesial karena dunia udah buat lu ada, Naz.</p>
+        <p>Gua bener-bener bersyukur bisa kenal sama lu coo.. orang yang selalu bisa bikin mood gua baik, bikin gua ngerasa nyaman, dan selalu nyebarin energi positif khususnya buat gua.</p>
+        <p>I hope your day is filled with laughter, love, and everything that makes you happy.</p>
+        <p>Semoga semua doa yang lu ucapin hari ini dikabulin satu per satu, semoga langkah lu ke depan selalu mudah kalau susah ya usaha biar mudah, dan semoga lu kaga pernah kehilangan semangat buat ngejar mimpi.</p>
+        <p>Remember, life isn’t always easy — but you’re stronger than you think. Jadi Naz, jangan pernah ragu sama diri lu sendiri. You deserve all the love, success, and happiness in the world. 💖</p>
+        <p>So, enjoy your day to the fullest! Makan yang enak, ketawa yang banyak, dan jangan lupa bersyukur atas semua yang udah kamu lewatin sampai sekarang.</p>
+        <p>Once again, happy birthday! Love you, my friend 💐</p>
+        <p>Ya walaupun kita ketemu juga ngga sengaja tapi gua bener-bener mau ngucapin makasi ke lu Naz, lu yang udah bisa bikin gua berhenti mikirin hal-hal yang ngeganggu pikiran.</p>
+        <p>Cheers to another year of laughter, adventures, and beautiful memories together 🥂</p>
+    </div>
+</div>
+
+<script>
+    // Animasi cover muncul
+    const title = document.getElementById('title');
+    const btn = document.getElementById('btn');
+    setTimeout(() => title.style.opacity = 1, 300);
+    setTimeout(() => btn.style.opacity = 1, 1000);
+
+    // Tombol buka pesan
+    btn.addEventListener('click', function(e){
+        e.preventDefault();
+        document.getElementById('cover').style.opacity = 0;
+        setTimeout(() => {
+            document.getElementById('cover').style.display = 'none';
+            const pesan = document.getElementById('pesan');
+            pesan.style.opacity = 1;
+            const card = document.getElementById('card');
+            card.classList.add('visible');
+
+            // Animasi teks paragraf muncul satu per satu
+            const paragraphs = card.querySelectorAll('p');
+            paragraphs.forEach((p, i) => {
+                setTimeout(() => {
+                    p.classList.add('visible');
+                }, i*400);
+            });
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
